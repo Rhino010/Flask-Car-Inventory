@@ -1,3 +1,10 @@
-from flask import Flask, render_templates
+from flask_wtf import FlaskForm
+from wtforms import StringField, PasswordField, SubmitField
+from wtforms.validators import DataRequired, Email
 
-app = Flask(__name__)
+class UserLoginForm(FlaskForm):
+    email = StringField('Email', validators = [DataRequired(), Email()])
+    password = PasswordField('Password', validators = [DataRequired()])
+    submit_button = SubmitField()
+
+    

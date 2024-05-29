@@ -18,15 +18,19 @@
         </div>
         <div class = "container">
             <ul class = "navbar navbar-dark">
-                <li class = "nav-item"><a href="{{url_for('site.home')}}" class = "nav-link">Home</a></li>
-                <li class = "nav-item"><a href="{{url_for('auth.signup')}}" class = "nav-link">Sign Up</a></li>
-                <li class = "nav-item"><a href="{{url_for('auth.signin')}}" class = "nav-link">Sign In</a></li>
-                <li class = "nav-item"><a href="{{url_for('auth.logout')}}" class = "nav-link">Logout</a></li>
+                <li class = "nav-item"><a href="{{url_for('site.home')}}" class = "nav-link text-light">Home</a></li>
+                <li class = "nav-item"><a href="{{url_for('auth.signup')}}" class = "nav-link text-light">Sign Up</a></li>
+                <li class = "nav-item"><a href="{{url_for('auth.signin')}}" class = "nav-link text-light">Sign In</a></li>
             </ul>
         </div>
     </nav>
+    <div class = "container">
+        <div class="image-container">
+            <img src="../static/images/Car-Background.jpg" class="image-fluid w-100 h-100" alt = "car lot image">
+        </div>
+    </div>
 {% block content %}
-{% end block %}
+{% endblock %}
 <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/2.9.2/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.1.0/js/bootstrap.min.js"></script>
 </body>
