@@ -19,7 +19,7 @@ def signup():
             user = User(email = email, password = password)
 
             db.session.add(user)
-            # db.session.commit()
+            db.session.commit()
 
             flash(f'Nailed it! Your account has been created {email}', 'User-created')
 
@@ -59,5 +59,8 @@ def signin():
     return render_template('sign-in.html', form = form)
 
 
-
+@auth.route('/logout')
+def logout():
+    logout_user()
+    return redirect(url_for('site.home'))
     

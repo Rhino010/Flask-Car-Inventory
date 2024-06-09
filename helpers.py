@@ -1,10 +1,10 @@
 from functools import wraps
 import secrets
 from models import User
+import json as std_json
 from flask import request, jsonify, json
 import decimal
 
-from models import User
 
 def token_required(our_flask_function):
     @wraps(our_flask_function)
@@ -30,10 +30,9 @@ def token_required(our_flask_function):
         return our_flask_function(current_user_token, *args, **kwargs)
     return decorated
 
-class JSONEncoder(json.JSONEncoder):
-    def default(self, obj):
+
+class JSONEncoder(std_json.JSONEncoder):
+    def default(self,obj):
         if isinstance(obj, decimal.Decimal):
-            #Convert decimal instances into strings
             return str(obj)
         return super(JSONEncoder, self).default(obj)
-

@@ -6,14 +6,18 @@ from datetime import datetime, timezone
 from werkzeug.security import generate_password_hash, check_password_hash
 from flask_login import LoginManager, UserMixin
 from flask_marshmallow import Marshmallow
-from tokenize import String
 
 
 login_manager = LoginManager()
 ma = Marshmallow()
 db = SQLAlchemy()
 
+@login_manager.user_loader
+def load_user(user_id):
+    return User.query.get(user_id)
+
 class User(db.Model, UserMixin):
+
     id = db.Column(db.String, primary_key = True)
     first_name = db.Column(db.String(150), nullable = True, default = '')
     last_name = db.Column(db.String(150), nullable = True, default = '')
@@ -47,20 +51,34 @@ class User(db.Model, UserMixin):
 
 
     
-# class Cars(db.Model):
-#     id = db.Column(db.String, primary_key = True)
-#     make = db.Column(db.String(150))
-#     car_model = db.Column(String(150))
-#     year = db.Column(String(150), nullable = True, default = '')
-#     stock_quantity = db.Column(int)
+class Cars(db.Model):
+    id = db.Column(db.String, primary_key = True, nullable = False)
+    make = db.Column(db.String(150), nullable = False)
+    car_model = db.Column(db.String(150), nullable = False)
+    year = db.Column(db.String(150), nullable = False)
+    stock_quantity = db.Column(db.Integer)
+    user_token = db.Column(db.String, db.ForeignKey('user.token'), nullable = False)
 
-#     def __init__(self, id, make, car_model, year, stock_quantity):
-#         self.id = id
-#         self.make = make
-#         self.car_model = car_model
-#         self.year = year
-#         self.stock_quantity = stock_quantity
+    def __init__(self, make, car_model, year, stock_quantity, user_token, id = ''):
+        self.id = self.set_id()
+        self.make = make
+        self.car_model = car_model
+        self.year = year
+        self.stock_quantity = stock_quantity
+        self.user_token = user_token
 
-#     def __repr__(self, make, model, year):
-#         return f'{year} {make} {model} has been added to the database.'
+    def __repr__(self, make, model, year):
+        return f'{year} {make} {model} has been added to the database.'
     
+    def set_id(self):
+        return (secrets.token_urlsafe())
+    
+
+
+class CarsSchema(ma.Schema):
+    class Meta:
+        fields = ['id', 'make', 'car_model', 'year', 'stock_quantity']
+   
+
+car_schema = CarsSchema()
+cars_schema = CarsSchema(many = True)

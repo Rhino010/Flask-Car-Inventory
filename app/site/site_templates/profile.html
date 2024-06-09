@@ -4,4 +4,12 @@
 <div class = "background bg-fixed">
     <img src="C:\Users\bollr\Documents\Coding-Temple-Self_Paced\Flask\Car_Inventory\app\static\images\Car-Background.jpg" alt="car lot">
 </div>
+<div>
+    <h1>Profile Details</h1>
+    <div class = "container">
+        <li class = "list-group-item">Token: {{ current_user.token }}</li>
+        <li class = "list-group-item">Email: {{ current_user.email }}</li>
+
+    </div>
+</div>
 {% endblock %}
