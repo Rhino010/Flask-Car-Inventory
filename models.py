@@ -8,6 +8,7 @@ from flask_login import LoginManager, UserMixin
 from flask_marshmallow import Marshmallow
 
 
+
 login_manager = LoginManager()
 ma = Marshmallow()
 db = SQLAlchemy()

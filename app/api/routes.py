@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, render_template, request
 from helpers import token_required
-from models import db, Cars, car_schema
+from models import db, Cars, car_schema, cars_schema
 
 
 api = Blueprint('api', __name__, url_prefix='/api')
@@ -12,7 +12,6 @@ def getdata():
 @api.route('/car_info', methods = ['POST'])
 @token_required
 def add_vehicle(current_user_token):
-    id = request.json['id']
     make = request.json['make']
     car_model = request.json['car_model']
     year = request.json['year']
@@ -21,7 +20,7 @@ def add_vehicle(current_user_token):
 
     print(f'BIG TESTER: {current_user_token.token}')
 
-    cars = Cars(id, make, car_model, year, stock_quantity, user_token = user_token)
+    cars = Cars(make, car_model, year, stock_quantity, user_token = user_token)
 
     db.session.add(cars)
     db.session.commit()
@@ -34,7 +33,7 @@ def add_vehicle(current_user_token):
 def get_car_info(current_user_token):
     a_user = current_user_token.token
     cars = Cars.query.filter_by(user_token = a_user).all()
-    response = car_schema.dump(cars)
+    response = cars_schema.dump(cars)
     return jsonify(response)
 
 @api.route('/car_info/<id>', methods = ['GET'])

@@ -11,22 +11,26 @@
 <title>Car Inventory</title>
 </head>
 <body>
-    <nav class = "navbar-nav bg-dark navbar-dark">
-        <div class = "container-fluid align-items">
-            <a class = "navbar-brand" href="{{url_for('site.home')}}">Car Inventory</a>
-            <span class = "navbar-toggler-icon con" ></span>
-        </div>
-        <div class = "container-fluid">
-            <ul class = "navbar navbar-dark">
-                <li class = "nav-item"><a href="{{url_for('site.home')}}" class = "nav-link text-light">Home</a></li>
-                <li class = "nav-item"><a href="{{url_for('site.profile')}}" class="nav-link text-light">Profile</a></li>
-                {% if current_user.is_authenticated %}
-                <li class = "nav-item"><a href="{{url_for('auth.logout')}}" class="nav-link text-light">Logout</a></li>
-                {% else %}
-                <li class = "nav-item"><a href="{{url_for('auth.signup')}}" class = "nav-link text-light">Sign Up</a></li>
-                <li class = "nav-item"><a href="{{url_for('auth.signin')}}" class = "nav-link text-light">Sign In</a></li>
-                {% endif %}
-            </ul>
+    <nav class = "navbar-nav bg-dark navbar-dark navbar-expand-lg">
+        <div class = "navbar-nav">
+            <!-- <button type = "button" class = "navbar-toggle collapsed navbar-dark bg-dark" data-bs-toggle = "collapse">
+                <span class = "navbar-toggler-icon"></span>
+            </button> -->
+            <div class = "container-fluid">
+                <a class = "navbar-brand" href="{{url_for('site.home')}}">Car Inventory</a>
+            </div>
+            <div class = "container-fluid">
+                <ul class = "navbar-nav nav-tabs nav-justified ms-auto mb-2 mb-lg-0 ">
+                    <li class = "nav-item"><a href="{{url_for('site.home')}}" class = "nav-link text-light">Home</a></li>
+                    {% if current_user.is_authenticated %}
+                    <li class = "nav-item"><a href="{{url_for('site.profile')}}" class="nav-link text-light">Profile</a></li>
+                    <li class = "nav-item"><a href="{{url_for('auth.logout')}}" class="nav-link text-light">Logout</a></li>
+                    {% else %}
+                    <li class = "nav-item"><a href="{{url_for('auth.signup')}}" class = "nav-link text-light">Sign Up</a></li>
+                    <li class = "nav-item"><a href="{{url_for('auth.signin')}}" class = "nav-link text-light">Sign In</a></li>
+                    {% endif %}
+                </ul>
+            </div>
         </div>
     </nav>
     <div class = "container">

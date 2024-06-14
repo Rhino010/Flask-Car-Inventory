@@ -12,7 +12,7 @@ from flask_cors import CORS
 
 
 from json import JSONEncoder
-from models import db as root_db, login_manager, ma
+from models import db as root_db, login_manager, ma, User
 
 
 app = Flask(__name__)
@@ -29,4 +29,29 @@ login_manager.init_app(app)
 ma.init_app(app)
 migrate = Migrate(app, root_db)
 
+# # This will automatically logout the user when the app is shut down
+# def logout_all_users(exception = None):
+#     try:
+#         # Will set user tokens to invalid upon logging out, essentially automatically logging out upon shut down.
+#         invalid_token = 'Invalid Token!'
+#         users = User.query.all()
+
+#         for user in users:
+#             user.token = invalid_token
+        
+#         root_db.session.commit()
+    
+#         print('All users have been successfully logged out.')
+
+#     except Exception as e:
+#         print(f'Logout unsuccessful for {e}.')
+
+#         root_db.session.rollback()
+
+#     finally:
+#         root_db.session.remove()
+
+# @app.teardown_appcontext
+# def teardown(exception):
+#     logout_all_users(exception)
 
