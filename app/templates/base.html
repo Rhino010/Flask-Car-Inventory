@@ -20,7 +20,7 @@
                 <a class = "navbar-brand" href="{{url_for('site.home')}}">Car Inventory</a>
             </div>
             <div class = "container-fluid">
-                <ul class = "navbar-nav nav-tabs nav-justified ms-auto mb-2 mb-lg-0 ">
+                <ul class = "navbar-nav nav-tabs nav-justified ms-auto mb-2 mb-lg-0">
                     <li class = "nav-item"><a href="{{url_for('site.home')}}" class = "nav-link text-light">Home</a></li>
                     {% if current_user.is_authenticated %}
                     <li class = "nav-item"><a href="{{url_for('site.profile')}}" class="nav-link text-light">Profile</a></li>
