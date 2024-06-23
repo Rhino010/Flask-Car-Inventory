@@ -1,6 +1,6 @@
 from flask import Blueprint, jsonify, render_template, request
-from helpers import token_required
-from models import db, Cars, car_schema, cars_schema
+from app.helpers import token_required
+from app.models import db, Cars, car_schema, cars_schema
 
 
 api = Blueprint('api', __name__, url_prefix='/api')

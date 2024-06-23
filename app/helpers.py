@@ -1,6 +1,6 @@
 from functools import wraps
 import secrets
-from models import User
+from app.models import User
 import json as std_json
 from flask import request, jsonify, json
 import decimal
@@ -10,7 +10,7 @@ def token_required(our_flask_function):
     @wraps(our_flask_function)
     def decorated(*args, **kwargs):
         token = None
-
+        print(request.headers['x-access-token'])
         if 'x-access-token' in request.headers:
             token = request.headers['x-access-token'].split(' ')[1]
         if not token:

@@ -8,7 +8,7 @@ from flask_migrate import Migrate
 from flask_cors import CORS
 
 from json import JSONEncoder
-from models import db as root_db, login_manager, ma
+from app.models import db as root_db, login_manager, ma
 
 
 app = Flask(__name__)

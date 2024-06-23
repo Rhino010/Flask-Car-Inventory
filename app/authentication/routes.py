@@ -1,6 +1,6 @@
 from flask import Flask, render_template, Blueprint, url_for, flash, request, redirect
-from forms import UserLoginForm
-from models import User, db, check_password_hash
+from app.forms import UserLoginForm
+from app.models import User, db, check_password_hash
 from flask_login import login_user, logout_user, LoginManager, current_user, login_required
 
 
